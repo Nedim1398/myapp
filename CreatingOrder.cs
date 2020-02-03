@@ -11,26 +11,39 @@ public class CreatingOrder : IState {
     public void SendNewOrder(Order order)
     {
         WriteLine("Connecting to market...");
-        WriteLine("Order pending!");
-        order.State = PendingNew.GetInstance;
+        if(order.Quantity > 0 && order.Price > 0)
+        {
+            WriteLine("Order pending!");
+            order.State = PendingNew.GetInstance;
+        }
+        else
+        {
+            WriteLine("Internal rejection. Price or Quantity not set properly.");
+            order.RejectOrder(order);
+        }
     }
 
     public void RejectOrder(Order order)
     {
-        WriteLine("Internal rejection");
-        order.State = Rejected.GetInstance;
+        WriteLine("Order not sent, cannot reject.");
     }
 
     public void ChangeQuantity(Order order) {
-        WriteLine("No quantity sent!");
+        WriteLine("Invalid quantity sent!");
     }
     public void ChangeQuantity(Order order, int qty) {
-        //WriteLine($"Quantity is now: {qty} shares!");
-        order.ChangeQuantity(order, qty);
+        order.Quantity = qty;
     }
 
     public void ChangePrice(Order order)
     {
-        throw new System.NotImplementedException();
+        WriteLine("Invalid price sent!");
+    }
+    public void ChangePrice(Order order, int price) {
+        order.Price = price;
+    }
+
+    public void ExecuteQuantity(Order order) {
+        WriteLine("Order not on market!");
     }
 }

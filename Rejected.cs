@@ -9,25 +9,37 @@ public class Rejected : IState {
         get { return instance; }
     }
 
-    void IState.ChangePrice(Order order)
+    public void SendNewOrder(Order order)
     {
-        throw new System.NotImplementedException();
+        WriteLine("Order has been reset, please input new parameters.");
+        order.Quantity = 0;
+        order.ExecutedQuantity = 0;
+        order.Price = 0;
+        order.State = CreatingOrder.GetInstance;
     }
 
-    void IState.ChangeQuantity(Order order)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    void IState.RejectOrder(Order order)
+    public void RejectOrder(Order order)
     {
         WriteLine("Order already rejected. Please create a new one.");
     }
 
-    void IState.SendNewOrder(Order order)
+    public void ChangeQuantity(Order order)
     {
-        WriteLine("Order has been reset, please input new parameters.");
-        order.ChangeQuantity(order, 0);
-        order.State = CreatingOrder.GetInstance;
+        WriteLine("Order already rejected. Please create a new one.");
+    }
+
+    public void ChangeQuantity(Order order, int qty) {
+        WriteLine("Order already rejected. Please create a new one.");
+    }
+
+        public void ChangePrice(Order order)
+    {
+        WriteLine("Order already rejected. Please create a new one.");
+    }
+    public void ChangePrice(Order order, int price) {
+        WriteLine("Order already rejected. Please create a new one.");
+    }
+    public void ExecuteQuantity(Order order) {
+        WriteLine("Order not on market!");
     }
 }

@@ -8,26 +8,42 @@ class MainClass {
 
         while(true)
         {
-            WriteLine("Awaiting instruction: 0 - change quantity | 1 - send new order | 2 - reject order");
-            instruction = int.Parse(ReadLine());
+            WriteLine("Awaiting instruction: 0 - reject order | 1 - send order (PendingNew/New) | 2 - change quantity | 3 - change price | 4 - partially execute | 5 - request cancel | 6 - cancel");
+            var isNumeric = int.TryParse(ReadLine(),out instruction);
+            if(!isNumeric) instruction = 666;
             switch(instruction)
             {
                 case 0:
-                    WriteLine("Input new quantity:");
-                    int qty = int.Parse(ReadLine());
-                    order.ChangeQuantity(order, qty);
+                    order.RejectOrder(order);
                     break;
                 case 1:
                     order.SendNewOrder(order);
                     break;
                 case 2:
-                    order.RejectOrder(order);
+                    WriteLine("Input new quantity:");
+                    isNumeric = int.TryParse(ReadLine(),out int qty);
+                    if(isNumeric && qty > 0)order.ChangeQuantity(order, qty);
+                    else order.ChangeQuantity(order);
+                    break;
+                case 3:
+                    WriteLine("Input new price:");
+                    isNumeric = int.TryParse(ReadLine(),out int price);
+                    if(isNumeric)order.ChangePrice(order, price);
+                    else order.ChangePrice(order);
+                    break;
+                case 4:
+                    order.ExecuteQuantity(order);
+                    break;
+                case 5:
+                    //order.State = PendingCancel.GetInstance;
                     break;
                 default:
-                    WriteLine("Awaiting instruction...");
+                    WriteLine("Invalid instruction.");
                     break;
             }
+            WriteLine("-----------------------------Execution Report---------------------------------");
             WriteLine(order);
+            WriteLine("------------------------------------------------------------------------------");
         }
     }
 }

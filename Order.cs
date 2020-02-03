@@ -2,8 +2,9 @@ using static System.Console;
 
 public class Order
 {
-    public int Quantity { get; private set; }
-    public int Price { get; private set; }
+    public int Quantity { get; set; }
+    public int ExecutedQuantity { get; set; }
+    public int Price { get; set; }
     private IState state;
 
     public IState State {
@@ -11,9 +12,9 @@ public class Order
     }
 
     public Order() {
-        Quantity = 101;
+        Quantity = 100;
+        ExecutedQuantity = 0;
         Price = 10;
-
         state = CreatingOrder.GetInstance;
     }
 
@@ -25,11 +26,25 @@ public class Order
         state.RejectOrder(this);
     }
 
+    public void ChangeQuantity(Order order) {
+        state.ChangeQuantity(this);
+    }
     public void ChangeQuantity(Order order, int qty) {
-        order.Quantity = qty;
+        state.ChangeQuantity(this, qty);
+    }
+
+    public void ChangePrice(Order order) {
+        state.ChangePrice(this);
+    }
+    public void ChangePrice(Order order, int price) {
+        state.ChangePrice(this, price);
+    }
+
+    public void ExecuteQuantity(Order order) {
+        state.ExecuteQuantity(this);
     }
 
     public override string ToString() {
-        return $"State: {state} | Quantity: {Quantity} | Price: {Price} \n";
+        return $"State: {state} | Quantity: {Quantity} | Executed Quantity: {ExecutedQuantity}| Price: {Price}";
     }
 }

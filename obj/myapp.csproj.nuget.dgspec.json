@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Korisnik\\Documents\\Code\\myapp\\myapp.csproj": {}
+    "/home/nedim/Code/myapp/myapp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Korisnik\\Documents\\Code\\myapp\\myapp.csproj": {
+    "/home/nedim/Code/myapp/myapp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Korisnik\\Documents\\Code\\myapp\\myapp.csproj",
+        "projectUniqueName": "/home/nedim/Code/myapp/myapp.csproj",
         "projectName": "myapp",
-        "projectPath": "C:\\Users\\Korisnik\\Documents\\Code\\myapp\\myapp.csproj",
-        "packagesPath": "C:\\Users\\Korisnik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Korisnik\\Documents\\Code\\myapp\\obj\\",
+        "projectPath": "/home/nedim/Code/myapp/myapp.csproj",
+        "packagesPath": "/home/nedim/.nuget/packages/",
+        "outputPath": "/home/nedim/Code/myapp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Korisnik\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/nedim/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -50,7 +50,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.101/RuntimeIdentifierGraph.json"
         }
       }
     }

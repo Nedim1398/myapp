@@ -10,27 +10,38 @@ public class PendingNew : IState {
     }
     public void SendNewOrder(Order order)
     {
-        if(order.Quantity.Equals(101))order.RejectOrder(order);
+        if(order.Quantity > 0) // Market check
+        {
+            WriteLine("Order sent!");
+            order.State = New.GetInstance;
+        }
         else
         {
-        WriteLine("Order sent!");
-        order.State = New.GetInstance;
+            order.RejectOrder(order);
         }
     }
 
     public void RejectOrder(Order order)
     {
-        WriteLine("Quantity does not respect lot size!");
+        WriteLine("Quantity does not respect lot size!"); // Market rejection
         order.State = Rejected.GetInstance;
     }
 
-    void IState.ChangeQuantity(Order order)
-    {
-        throw new System.NotImplementedException();
+    public void ChangeQuantity(Order order) {
+        WriteLine("Invalid quantity sent!");
+    }
+    public void ChangeQuantity(Order order, int qty) {
+        order.Quantity = qty;
     }
 
-    void IState.ChangePrice(Order order)
+    public void ChangePrice(Order order)
     {
-        throw new System.NotImplementedException();
+        WriteLine("Invalid price sent!");
+    }
+    public void ChangePrice(Order order, int price) {
+        order.Price = price;
+    }
+    public void ExecuteQuantity(Order order) {
+        WriteLine("Order not on market!");
     }
 }

@@ -3,7 +3,11 @@
     void SendNewOrder(Order order);
     void RejectOrder(Order order);
     void ChangeQuantity(Order order);
+    void ChangeQuantity(Order order, int qty);
     void ChangePrice(Order order);
+    void ChangePrice(Order order, int price);
+    void ExecuteQuantity(Order order);
+
     // void New(Order order);
     // void PartiallyFilled(Order order);
     // void Filled(Order order);
