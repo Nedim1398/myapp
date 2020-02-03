@@ -14,6 +14,8 @@ public class Filled : IState {
         order.Quantity = 0;
         order.ExecutedQuantity = 0;
         order.Price = 0;
+        WriteLine("Order has been reset.");
+        order.State = CreatingOrder.GetInstance;
     }
     public void RejectOrder(Order order) {
         WriteLine("Order cannot be rejected!");

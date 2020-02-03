@@ -8,7 +8,7 @@ class MainClass {
 
         while(true)
         {
-            WriteLine("Awaiting instruction: 0 - reject order | 1 - send order (PendingNew/New) | 2 - change quantity | 3 - change price | 4 - partially execute | 5 - request cancel | 6 - cancel");
+            WriteLine("Awaiting instruction: 0 - reject order | 1 - send order (PendingNew/New) | 2 - change quantity | 3 - change price | 4 - partially execute |");
             var isNumeric = int.TryParse(ReadLine(),out instruction);
             if(!isNumeric) instruction = 666;
             switch(instruction)
