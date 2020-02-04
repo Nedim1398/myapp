@@ -42,4 +42,13 @@ public class Filled : IState {
     public void ExecuteQuantity(Order order) {
         WriteLine("Order already fully executed, send a new one or increase the quantity.");
     }
+    public void StopOrder(Order order) {
+        WriteLine("Cannot stop order in current state.");
+    }
+    public void CancelOrder(Order order) {
+        WriteLine("Cannot cancel order in current state.");
+    }
+    public void ReplaceOrder(Order order) {
+        order.State = PendingReplace.GetInstance;
+    }
 }

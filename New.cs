@@ -10,21 +10,12 @@ public class New : IState {
         get { return instance; }
     }
 
-    public void SendNewOrder(Order order)
-    {
+    public void SendNewOrder(Order order) {
         WriteLine("MiniTradeMind does not support multiple orders yet, come back tomorrow.");
     }
     public void RejectOrder(Order order) {
         WriteLine("Order rejected!");
         order.State = Rejected.GetInstance;
-    }
-
-    public void ChangePrice(Order order)
-    {
-        WriteLine("Invalid price sent!");
-    }
-    public void ChangePrice(Order order, int price) {
-        order.Price = price;
     }
 
     public void ChangeQuantity(Order order) {
@@ -34,6 +25,13 @@ public class New : IState {
     public void ChangeQuantity(Order order, int qty) {
         order.Quantity = qty;
     }
+
+    public void ChangePrice(Order order) {
+        WriteLine("Invalid price sent!");
+    }
+    public void ChangePrice(Order order, int price) {
+        order.Price = price;
+    }
     public void ExecuteQuantity(Order order) {
         WriteLine("Executed quantity!");
         Random rnd = new Random();
@@ -42,5 +40,14 @@ public class New : IState {
         order.Quantity -= randomQuantity;
         order.ExecutedQuantity += randomQuantity;
         order.State = PartiallyFilled.GetInstance;
+    }
+    public void StopOrder(Order order) {
+        order.State = Stopped.GetInstance;
+    }
+    public void CancelOrder(Order order) {
+        order.State = PendingCancel.GetInstance;
+    }
+    public void ReplaceOrder(Order order) {
+        order.State = PendingReplace.GetInstance;
     }
 }

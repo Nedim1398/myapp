@@ -43,7 +43,15 @@ public class Order
     public void ExecuteQuantity(Order order) {
         state.ExecuteQuantity(this);
     }
-
+    public void StopOrder(Order order) {
+        state.StopOrder(this);
+    }
+    public void CancelOrder(Order order) {
+        state.CancelOrder(this);
+    }
+    public void ReplaceOrder(Order order) {
+        state.ReplaceOrder(this);
+    }
     public override string ToString() {
         return $"State: {state} | Quantity: {Quantity} | Executed Quantity: {ExecutedQuantity}| Price: {Price}";
     }

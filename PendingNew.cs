@@ -23,7 +23,7 @@ public class PendingNew : IState {
 
     public void RejectOrder(Order order)
     {
-        WriteLine("Quantity does not respect lot size!"); // Market rejection
+        WriteLine("Quantity does not respect lot size! | Market Rejection"); // Market rejection
         order.State = Rejected.GetInstance;
     }
 
@@ -43,5 +43,14 @@ public class PendingNew : IState {
     }
     public void ExecuteQuantity(Order order) {
         WriteLine("Order not on market!");
+    }
+    public void StopOrder(Order order) {
+        WriteLine("Cannot stop order in current state.");
+    }
+    public void CancelOrder(Order order) {
+        WriteLine("Cannot cancel order in current state.");
+    }
+    public void ReplaceOrder(Order order) {
+        WriteLine("Cannot replace order in current state.");
     }
 }

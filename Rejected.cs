@@ -25,7 +25,7 @@ public class Rejected : IState {
 
     public void ChangeQuantity(Order order)
     {
-        WriteLine("Order already rejected. Please create a new one.");
+        WriteLine("Invalid quantity sent!");
     }
 
     public void ChangeQuantity(Order order, int qty) {
@@ -34,12 +34,21 @@ public class Rejected : IState {
 
         public void ChangePrice(Order order)
     {
-        WriteLine("Order already rejected. Please create a new one.");
+        WriteLine("Invalid price sent!");
     }
     public void ChangePrice(Order order, int price) {
         WriteLine("Order already rejected. Please create a new one.");
     }
     public void ExecuteQuantity(Order order) {
         WriteLine("Order not on market!");
+    }
+    public void StopOrder(Order order) {
+        WriteLine("Cannot stop order in current state.");
+    }
+    public void CancelOrder(Order order) {
+        WriteLine("Cannot cancel order in current state.");
+    }
+    public void ReplaceOrder(Order order) {
+        WriteLine("Cannot replace order in current state.");
     }
 }

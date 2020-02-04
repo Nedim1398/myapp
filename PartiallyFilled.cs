@@ -15,7 +15,7 @@ public class PartiallyFilled : IState {
         WriteLine("MiniTradeMind does not support multiple orders yet, come back tomorrow.");
     }
     public void RejectOrder(Order order) {
-        WriteLine("Order cannot be rejected!");
+        WriteLine("Cannot reject order in current state.");
     }
 
     public void ChangePrice(Order order)
@@ -44,5 +44,14 @@ public class PartiallyFilled : IState {
         {
         order.State = Filled.GetInstance;
         }
+    }
+    public void StopOrder(Order order) {
+        WriteLine("Cannot stop order in current state.");
+    }
+    public void CancelOrder(Order order) {
+        order.State = PendingCancel.GetInstance;
+    }
+    public void ReplaceOrder(Order order) {
+        order.State = PendingReplace.GetInstance;
     }
 }

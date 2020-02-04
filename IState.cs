@@ -7,7 +7,9 @@
     void ChangePrice(Order order);
     void ChangePrice(Order order, int price);
     void ExecuteQuantity(Order order);
-
+    void StopOrder(Order order);
+    void CancelOrder(Order order);
+    void ReplaceOrder(Order order);
     // void New(Order order);
     // void PartiallyFilled(Order order);
     // void Filled(Order order);

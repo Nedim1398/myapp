@@ -8,7 +8,7 @@ class MainClass {
 
         while(true)
         {
-            WriteLine("Awaiting instruction: 0 - reject order | 1 - send order (PendingNew/New) | 2 - change quantity | 3 - change price | 4 - partially execute |");
+            WriteLine("Instruction: 0 - reject | 1 - send order (PendingNew/New) | 2 - change QTY | 3 - change Px | 4 - partially execute | 5 - ");
             var isNumeric = int.TryParse(ReadLine(),out instruction);
             if(!isNumeric) instruction = 666;
             switch(instruction)
@@ -35,7 +35,13 @@ class MainClass {
                     order.ExecuteQuantity(order);
                     break;
                 case 5:
-                    //order.State = PendingCancel.GetInstance;
+                    order.StopOrder(order);
+                    break;
+                case 6:
+                    order.CancelOrder(order);
+                    break;
+                case 7:
+                    order.ReplaceOrder(order);
                     break;
                 default:
                     WriteLine("Invalid instruction.");
