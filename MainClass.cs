@@ -4,8 +4,9 @@ class MainClass {
     static void Main(string[] args) {
         int instruction = 0;
         Order order = new Order();
+        WriteLine("-----------------------------Execution Report---------------------------------");
         WriteLine(order);
-
+        WriteLine("------------------------------------------------------------------------------\n");
         while(true)
         {
             WriteLine("Instruction: 0 - reject | 1 - send order (PendingNew/New) | 2 - change QTY | 3 - change Px | 4 - partially execute | 5 - stop | 6 - cancel | 7 - replace");
@@ -49,7 +50,7 @@ class MainClass {
             }
             WriteLine("-----------------------------Execution Report---------------------------------");
             WriteLine(order);
-            WriteLine("------------------------------------------------------------------------------");
+            WriteLine("------------------------------------------------------------------------------\n");
         }
     }
 }
