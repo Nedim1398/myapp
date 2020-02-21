@@ -1,47 +1,76 @@
 ﻿using static System.Console;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
-class MainClass {
-    static void Main(string[] args) {
-        int instruction = 0;
+public class MainClass {
+
+    public static void searchFile(string text,Order order) {
+
+        /*var expressions = new List<string>();// (@"State.+?(?=\|)",@"Quantity.+?(?=\|)",@"ExecutedQuantity.+?(?=\|)",@"Price.+?(?=\|)");
+        expressions.Add(@"State.+?(?=\|)");
+        expressions.Add(@"Quantity.+?(?=\|)");
+        expressions.Add(@"ExecutedQuantity.+?(?=\|)");
+        expressions.Add(@"Price.+?(?=\|)");
+        
+        var expr = expressions.ToArray();*/
+
+        string matchSubstring;
+        Match match = Regex.Match(text,@"State.+?(?=\|)");
+        matchSubstring = match.ToString().Substring(7);
+        
+        /*match = Regex.Match(text,@"Quantity.+?(?=\|)");
+        matchSubstring = match.ToString().Substring(10);
+        order.ChangeQuantity(order, int.Parse(matchSubstring));
+        
+        match = Regex.Match(text,@"ExecutedQuantity.+?(?=\|)");
+        matchSubstring = match.ToString().Substring(18);
+        order.ChangeQuantity(order, int.Parse(matchSubstring));
+
+        match = Regex.Match(text,@"Price.+?(?=\|)");
+        matchSubstring = match.ToString().Substring(7);
+        order.ChangeQuantity(order, int.Parse(matchSubstring));*/
+    }
+
+    public static void Main(string[] args) {
+        string instruction = "";
         Order order = new Order();
+        string[] lines = System.IO.File.ReadAllLines(@"test.txt");
+        
+        //System.Console.WriteLine("Contents of touch.txt = {0}", lines);
+        //searchFile(lines[0],order);
+        string matchSubstring;
+        Match match = Regex.Match(lines[0],@"State.+?(?=\|)");
+        matchSubstring = match.ToString().Substring(7);
+        System.Console.WriteLine(matchSubstring + " <========= read from file");
         WriteLine("-----------------------------Execution Report---------------------------------");
         WriteLine(order);
         WriteLine("------------------------------------------------------------------------------\n");
         while(true)
         {
-            WriteLine("Instruction: 0 - reject | 1 - send order (PendingNew/New) | 2 - change QTY | 3 - change Px | 4 - partially execute | 5 - stop | 6 - cancel | 7 - replace");
-            var isNumeric = int.TryParse(ReadLine(),out instruction);
-            if(!isNumeric) instruction = 666;
+            //WriteLine("Instruction: 0 - reject | 1 - send order (PendingNew/New) | 2 - change QTY | 3 - change Px | 4 - partially execute | 5 - stop | 6 - cancel | 7 - replace");
+            instruction = matchSubstring;
+            //if(!isNumeric) instruction = 666;
             switch(instruction)
             {
-                case 0:
+                case "Rejected ":
                     order.RejectOrder(order);
                     break;
-                case 1:
+                case "PendingNew ":
                     order.SendNewOrder(order);
                     break;
-                case 2:
-                    WriteLine("Input new quantity:");
-                    isNumeric = int.TryParse(ReadLine(),out int qty);
-                    if(isNumeric && qty > 0)order.ChangeQuantity(order, qty);
-                    else order.ChangeQuantity(order);
+                case "New ":
+                    order.SendNewOrder(order);
                     break;
-                case 3:
-                    WriteLine("Input new price:");
-                    isNumeric = int.TryParse(ReadLine(),out int price);
-                    if(isNumeric)order.ChangePrice(order, price);
-                    else order.ChangePrice(order);
-                    break;
-                case 4:
+                case "PartiallyFilled ":
                     order.ExecuteQuantity(order);
                     break;
-                case 5:
+                case "Stopped ":
                     order.StopOrder(order);
                     break;
-                case 6:
+                case "PendingCancel ":
                     order.CancelOrder(order);
                     break;
-                case 7:
+                case "PendingReplace ":
                     order.ReplaceOrder(order);
                     break;
                 default:
@@ -51,6 +80,8 @@ class MainClass {
             WriteLine("-----------------------------Execution Report---------------------------------");
             WriteLine(order);
             WriteLine("------------------------------------------------------------------------------\n");
+            
+            ReadLine();
         }
     }
 }

@@ -34,11 +34,11 @@ public class PartiallyFilled : IState {
         order.Quantity = qty;
     }
     public void ExecuteQuantity(Order order) {
-        WriteLine("Executed quantity!");
+        /*WriteLine("Executed quantity!");
         Random rnd = new Random();
         int randomQuantity = rnd.Next(1,order.Quantity);
         order.Quantity -= randomQuantity;
-        order.ExecutedQuantity += randomQuantity;
+        order.ExecutedQuantity += randomQuantity;*/
 
         if(order.Quantity == 0)
         {
