@@ -34,12 +34,19 @@ public class New : IState {
     }
     public void ExecuteQuantity(Order order) {
         WriteLine("Executed quantity!");
-        Random rnd = new Random();
+
+        
+
+        order.State = PartiallyFilled.GetInstance;
+
+        
+        /*Random rnd = new Random();
         int randomQuantity = rnd.Next(1,order.Quantity);
         
         order.Quantity -= randomQuantity;
-        order.ExecutedQuantity += randomQuantity;
-        order.State = PartiallyFilled.GetInstance;
+        order.ExecutedQuantity += randomQuantity;*/
+        
+
     }
     public void StopOrder(Order order) {
         order.State = Stopped.GetInstance;

@@ -12,9 +12,9 @@ public class Order
     }
 
     public Order() {
-        Quantity = 100;
+        Quantity = 0;
         ExecutedQuantity = 0;
-        Price = 10;
+        Price = 0;
         state = PendingNew.GetInstance;
     }
 

@@ -1,6 +1,5 @@
 ﻿using static System.Console;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
 
 public class MainClass {
 
@@ -12,13 +11,13 @@ public class MainClass {
         expressions.Add(@"ExecutedQuantity.+?(?=\|)");
         expressions.Add(@"Price.+?(?=\|)");
         
-        var expr = expressions.ToArray();*/
+        var expr = expressions.ToArray();
 
         string matchSubstring;
         Match match = Regex.Match(text,@"State.+?(?=\|)");
         matchSubstring = match.ToString().Substring(7);
         
-        /*match = Regex.Match(text,@"Quantity.+?(?=\|)");
+        match = Regex.Match(text,@"Quantity.+?(?=\|)");
         matchSubstring = match.ToString().Substring(10);
         order.ChangeQuantity(order, int.Parse(matchSubstring));
         
@@ -34,22 +33,47 @@ public class MainClass {
     public static void Main(string[] args) {
         string instruction = "";
         Order order = new Order();
-        string[] lines = System.IO.File.ReadAllLines(@"test.txt");
-        
-        //System.Console.WriteLine("Contents of touch.txt = {0}", lines);
-        //searchFile(lines[0],order);
-        string matchSubstring;
-        Match match = Regex.Match(lines[0],@"State.+?(?=\|)");
-        matchSubstring = match.ToString().Substring(7);
-        System.Console.WriteLine(matchSubstring + " <========= read from file");
+        string[] lines = System.IO.File.ReadAllLines(@"FIXLog.txt");
+
         WriteLine("-----------------------------Execution Report---------------------------------");
         WriteLine(order);
         WriteLine("------------------------------------------------------------------------------\n");
-        while(true)
+
+        //System.Console.WriteLine("Contents of touch.txt = {0}", lines);
+        //searchFile(lines[0],order);
+        
+        for(int i = 0; i < lines.Length; ++i)
         {
+        
+        string fixState = Regex.Match(lines[i],@"(?<=State: ).+?(?=\|)").ToString();
+        var fixQty = int.Parse(Regex.Match(lines[i],@"(?<=Quantity: ).+?(?=\|)").ToString());
+        var fixExecQty = int.Parse(Regex.Match(lines[i],@"(?<=Executed Quantity: ).+?(?=\|)").ToString());
+        var fixPrice = int.Parse(Regex.Match(lines[i],@"(?<=Price: ).+?(?=\|)").ToString());
+
+        //matchSubstring = fixState.ToString().Substring(7);
+        System.Console.WriteLine("State: " + fixState);
+        System.Console.WriteLine("Quantity: " + fixQty);
+        System.Console.WriteLine("Executed Quantity: " + fixExecQty);
+        System.Console.WriteLine("Price: " + fixPrice + " <========= read from file\n");
+
             //WriteLine("Instruction: 0 - reject | 1 - send order (PendingNew/New) | 2 - change QTY | 3 - change Px | 4 - partially execute | 5 - stop | 6 - cancel | 7 - replace");
-            instruction = matchSubstring;
+            
             //if(!isNumeric) instruction = 666;
+
+        // IDEA: Implement the validation here that values only get sent further if they changed and make sense for the specific state.
+        // Will take some time and a lot of methods unless the values can be made public.
+        
+
+        /* IDEA: Pre-validation of allowed states / values allowed to change for each state.
+           Make two arrays of states which can / cannot change values and exit if invalid state change.
+
+        string[] staticStates = new string [3];
+        string[] fluidStates = new String[7]
+
+        if(order.Quantity == fixQty && order.ExecutedQuantity == fixExecQty && order.Price == fixPrice && temp[])*/
+
+        instruction = fixState;
+
             switch(instruction)
             {
                 case "Rejected ":
@@ -74,14 +98,15 @@ public class MainClass {
                     order.ReplaceOrder(order);
                     break;
                 default:
-                    WriteLine("Invalid instruction.");
+                    WriteLine("Invalid workflow.");
                     break;
             }
-            WriteLine("-----------------------------Execution Report---------------------------------");
-            WriteLine(order);
-            WriteLine("------------------------------------------------------------------------------\n");
+
+        WriteLine("-----------------------------Execution Report---------------------------------");
+        WriteLine(order);
+        WriteLine("------------------------------------------------------------------------------\n");
             
-            ReadLine();
+        ReadLine();
         }
     }
 }
