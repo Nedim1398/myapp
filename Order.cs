@@ -53,6 +53,6 @@ public class Order
         state.ReplaceOrder(this);
     }
     public override string ToString() {
-        return $"State: {state} | Quantity: {Quantity} | Executed Quantity: {ExecutedQuantity}| Price: {Price}";
+        return $"State: {state} | Quantity: {Quantity} | Executed Quantity: {ExecutedQuantity} | Price: {Price} |";
     }
 }

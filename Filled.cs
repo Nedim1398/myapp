@@ -40,7 +40,7 @@ public class Filled : IState {
         //else WriteLine($"Quantity has to be bigger than {order.Quantity}!");          Should there be some limitation here?
     }
     public void ExecuteQuantity(Order order) {
-        WriteLine("Order already fully executed, send a new one or increase the quantity.");
+        WriteLine("Order fully executed, send a new one or increase the quantity.");
     }
     public void StopOrder(Order order) {
         WriteLine("Cannot stop order in current state.");
