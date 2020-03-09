@@ -46,8 +46,12 @@ public class MainClass {
         string[] fluidStates = new String[7]
 
         if(order.Quantity == fixQty && order.ExecutedQuantity == fixExecQty && order.Price == fixPrice && temp[])*/
-
+        
         instruction = fixState;
+
+
+        // Current state and future state e.g. PendingNew -> StopOrder // case:PendingNew . . . case:Stopped order.StopOrder
+        // This is true to a certain point, redefine methods to follow incoming messages, not internal workflow e.g. PendingNew goes into New for no reason
 
             switch(instruction)
             {

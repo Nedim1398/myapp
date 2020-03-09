@@ -41,11 +41,16 @@ public class PendingCancel : IState {
     }
     public void ExecuteQuantity(Order order) {
         WriteLine("Executed quantity!");
-        Random rnd = new Random();
+        /*Random rnd = new Random();
         int randomQuantity = rnd.Next(1,order.Quantity);
         
         order.Quantity -= randomQuantity;
-        order.ExecutedQuantity += randomQuantity;
+        order.ExecutedQuantity += randomQuantity;*/
+
+        if(order.Quantity == 0)
+        {
+        order.State = Filled.GetInstance;
+        }
     }
     public void StopOrder(Order order) {
         WriteLine("Cannot stop order in current state.");

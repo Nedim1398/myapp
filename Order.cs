@@ -15,7 +15,7 @@ public class Order
         Quantity = 0;
         ExecutedQuantity = 0;
         Price = 0;
-        state = PendingNew.GetInstance;
+        state = CreatingOrder.GetInstance;
     }
 
     public void SendNewOrder(Order order) {
