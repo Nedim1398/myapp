@@ -55,9 +55,6 @@ public class MainClass {
 
             switch(instruction)
             {
-                case "Rejected ":
-                    order.RejectOrder(order);
-                    break;
                 case "PendingNew ":
                     order.SendNewOrder(order);
                     break;
@@ -70,17 +67,23 @@ public class MainClass {
                 case "Filled ":
                     order.ExecuteQuantity(order);
                     break;
-                case "Stopped ":
-                    order.StopOrder(order);
+                case "DoneForDay ":
+                    order.ExecuteQuantity(order);
                     break;
                 case "PendingCancel ":
                     order.CancelOrder(order);
                     break;
+                case "PendingReplace ":
+                    order.ReplaceOrder(order);
+                    break;
                 case "Canceled ":
                     order.CancelOrder(order);
                     break;
-                case "PendingReplace ":
-                    order.ReplaceOrder(order);
+                case "Rejected ":
+                    order.RejectOrder(order);
+                    break;
+                case "Stopped ":
+                    order.StopOrder(order);
                     break;
                 default:
                     WriteLine("Invalid workflow.");

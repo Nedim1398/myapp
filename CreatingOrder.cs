@@ -10,17 +10,7 @@ public class CreatingOrder : IState {
     }
     public void SendNewOrder(Order order)
     {
-        WriteLine("Connecting to market...");
-        if(order.Quantity > 0 && order.Price > 0)
-        {
-            WriteLine("Order pending!");
-            order.State = PendingNew.GetInstance;
-        }
-        else
-        {
-            WriteLine("Internal rejection. Price or Quantity not set properly.");
-            order.RejectOrder(order);
-        }
+        order.State = PendingNew.GetInstance;
     }
 
     public void RejectOrder(Order order)
