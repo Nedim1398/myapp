@@ -1,5 +1,6 @@
 ﻿using static System.Console;
 using System.Text.RegularExpressions;
+using System.Reflection;
 
 public class MainClass {
 
@@ -34,7 +35,8 @@ public class MainClass {
         order.Quantity = fixQty;
         order.ExecutedQuantity = fixExecQty;
         order.Price = fixPrice;
-        
+        instruction = fixState;
+        //MethodInfo mi = fixState.GetType().GetMethod(order);
         // IDEA: Implement the validation here that values only get sent further if they changed and make sense for the specific state.
         // Will take some time and a lot of methods unless the values can be made public.
         
@@ -46,9 +48,6 @@ public class MainClass {
         string[] fluidStates = new String[7]
 
         if(order.Quantity == fixQty && order.ExecutedQuantity == fixExecQty && order.Price == fixPrice && temp[])*/
-        
-        instruction = fixState;
-
 
         // Current state and future state e.g. PendingNew -> StopOrder // case:PendingNew . . . case:Stopped order.StopOrder
         // This is true to a certain point, redefine methods to follow incoming messages, not internal workflow e.g. PendingNew goes into New for no reason
@@ -56,34 +55,34 @@ public class MainClass {
             switch(instruction)
             {
                 case "PendingNew ":
-                    order.SendNewOrder(order);
+                    order.StatePendingNew(order);
                     break;
                 case "New ":
-                    order.SendNewOrder(order);
+                    order.StateNew(order);
                     break;
                 case "PartiallyFilled ":
-                    order.ExecuteQuantity(order);
+                    order.StatePartiallyFilled(order);
                     break;
                 case "Filled ":
-                    order.ExecuteQuantity(order);
+                    order.StateFilled(order);
                     break;
                 case "DoneForDay ":
-                    order.ExecuteQuantity(order);
+                    order.StateDoneForDay(order);
                     break;
                 case "PendingCancel ":
-                    order.CancelOrder(order);
+                    order.StatePendingCancel(order);
                     break;
                 case "PendingReplace ":
-                    order.ReplaceOrder(order);
+                    order.StatePendingReplace(order);
                     break;
                 case "Canceled ":
-                    order.CancelOrder(order);
+                    order.StateCanceled(order);
                     break;
                 case "Rejected ":
-                    order.RejectOrder(order);
+                    order.StateRejected(order);
                     break;
                 case "Stopped ":
-                    order.StopOrder(order);
+                    order.StateStopped(order);
                     break;
                 default:
                     WriteLine("Invalid workflow.");

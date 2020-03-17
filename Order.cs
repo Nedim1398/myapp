@@ -18,39 +18,35 @@ public class Order
         state = CreatingOrder.GetInstance;
     }
 
-    public void SendNewOrder(Order order) {
-        state.SendNewOrder(this);
+    public void StatePendingNew(Order order){
+        state.StatePendingNew(this);
     }
-
-    public void RejectOrder(Order order) {
-        state.RejectOrder(this);
+    public void StateNew(Order order){
+        state.StateNew(this);
     }
-
-    public void ChangeQuantity(Order order) {
-        state.ChangeQuantity(this);
+    public void StatePartiallyFilled(Order order){
+        state.StatePartiallyFilled(this);
     }
-    public void ChangeQuantity(Order order, int qty) {
-        state.ChangeQuantity(this, qty);
+    public void StateFilled(Order order){
+        state.StateFilled(this);
     }
-
-    public void ChangePrice(Order order) {
-        state.ChangePrice(this);
+    public void StateDoneForDay(Order order){
+        state.StateDoneForDay(this);
     }
-    public void ChangePrice(Order order, int price) {
-        state.ChangePrice(this, price);
+    public void StatePendingCancel(Order order){
+        state.StatePendingCancel(this);
     }
-
-    public void ExecuteQuantity(Order order) {
-        state.ExecuteQuantity(this);
+    public void StatePendingReplace(Order order){
+        state.StatePendingReplace(this);
     }
-    public void StopOrder(Order order) {
-        state.StopOrder(this);
+    public void StateCanceled(Order order){
+        state.StateCanceled(this);
     }
-    public void CancelOrder(Order order) {
-        state.CancelOrder(this);
+    public void StateRejected(Order order){
+        state.StateRejected(this);
     }
-    public void ReplaceOrder(Order order) {
-        state.ReplaceOrder(this);
+    public void StateStopped(Order order){
+        state.StateStopped(this);
     }
     public override string ToString() {
         return $"State: {state} | Quantity: {Quantity} | Executed Quantity: {ExecutedQuantity} | Price: {Price} |";

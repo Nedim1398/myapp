@@ -4,4 +4,6 @@ State: PartiallyFilled | Quantity: 17 | Executed Quantity: 83 | Price: 10 |
 State: PartiallyFilled | Quantity: 16 | Executed Quantity: 84 | Price: 10 |
 State: PartiallyFilled | Quantity: 1 | Executed Quantity: 99 | Price: 10 |
 State: Filled | Quantity: 0 | Executed Quantity: 100 | Price: 10 |
+State: New | Quantity: 666 | Executed Quantity: 0 | Price: 10 |
 State: PendingNew | Quantity: 666 | Executed Quantity: 0 | Price: 10 |
+State: DoneForDay | Quantity: 0 | Executed Quantity: 0 | Price: 10 |

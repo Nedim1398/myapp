@@ -10,48 +10,34 @@ public class PartiallyFilled : IState {
         get { return instance; }
     }
 
-    public void SendNewOrder(Order order)
-    {
-        WriteLine("MiniTradeMind does not support multiple orders yet, come back tomorrow.");
+    public void StatePendingNew(Order order){
+        
     }
-    public void RejectOrder(Order order) {
-        WriteLine("Cannot reject order in current state.");
-    }
+    public void StateNew(Order order){
 
-    public void ChangePrice(Order order)
-    {
-        WriteLine("Invalid price sent!");
     }
-    public void ChangePrice(Order order, int price) {
-        order.Price = price;
+    public void StatePartiallyFilled(Order order){
+        WriteLine("State unchanged.");
     }
+    public void StateFilled(Order order){
 
-    public void ChangeQuantity(Order order) {
-        WriteLine("Invalid quantity sent!");
     }
+    public void StateDoneForDay(Order order){
 
-    public void ChangeQuantity(Order order, int qty) {
-        order.Quantity = qty;
     }
-    public void ExecuteQuantity(Order order) {
-        /*WriteLine("Executed quantity!");
-        Random rnd = new Random();
-        int randomQuantity = rnd.Next(1,order.Quantity);
-        order.Quantity -= randomQuantity;
-        order.ExecutedQuantity += randomQuantity;*/
+    public void StatePendingCancel(Order order){
 
-        if(order.Quantity == 0)
-        {
-        order.State = Filled.GetInstance;
-        }
     }
-    public void StopOrder(Order order) {
-        WriteLine("Cannot stop order in current state.");
+    public void StatePendingReplace(Order order){
+
     }
-    public void CancelOrder(Order order) {
-        order.State = PendingCancel.GetInstance;
+    public void StateCanceled(Order order){
+
     }
-    public void ReplaceOrder(Order order) {
-        order.State = PendingReplace.GetInstance;
+    public void StateRejected(Order order){
+
+    }
+    public void StateStopped(Order order){
+
     }
 }

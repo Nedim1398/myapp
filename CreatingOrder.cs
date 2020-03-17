@@ -8,41 +8,34 @@ public class CreatingOrder : IState {
     public static CreatingOrder GetInstance {
         get { return instance; }
     }
-    public void SendNewOrder(Order order)
-    {
+    public void StatePendingNew(Order order){
         order.State = PendingNew.GetInstance;
     }
-
-    public void RejectOrder(Order order)
-    {
-        WriteLine("Order not sent, cannot reject.");
+    public void StateNew(Order order){
+        order.State = New.GetInstance;
     }
-
-    public void ChangeQuantity(Order order) {
-        WriteLine("Invalid quantity sent!");
+    public void StatePartiallyFilled(Order order){
+        order.State = PartiallyFilled.GetInstance;
     }
-    public void ChangeQuantity(Order order, int qty) {
-        order.Quantity = qty;
+    public void StateFilled(Order order){
+        order.State = Filled.GetInstance;
     }
-
-    public void ChangePrice(Order order)
-    {
-        WriteLine("Invalid price sent!");
+    public void StateDoneForDay(Order order){
+        order.State = DoneForDay.GetInstance;
     }
-    public void ChangePrice(Order order, int price) {
-        order.Price = price;
+    public void StatePendingCancel(Order order){
+        order.State = PendingCancel.GetInstance;
     }
-
-    public void ExecuteQuantity(Order order) {
-        WriteLine("Order not on market!");
+    public void StatePendingReplace(Order order){
+        order.State = PendingReplace.GetInstance;
     }
-    public void StopOrder(Order order) {
-        WriteLine("Cannot stop order in current state.");
+    public void StateCanceled(Order order){
+        order.State = Canceled.GetInstance;
     }
-    public void CancelOrder(Order order) {
-        WriteLine("Cannot cancel order in current state.");
+    public void StateRejected(Order order){
+        order.State = Rejected.GetInstance;
     }
-    public void ReplaceOrder(Order order) {
-        WriteLine("Cannot replace order in current state.");
+    public void StateStopped(Order order){
+        order.State = Stopped.GetInstance;
     }
 }
