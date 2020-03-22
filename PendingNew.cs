@@ -21,26 +21,26 @@ public class PendingNew : IState {
         WriteLine("Invalid state.");
     }
     public void StateFilled(Order order){
-
+        WriteLine("Invalid state.");
     }
     public void StateDoneForDay(Order order){
-
+        WriteLine("Invalid state.");
     }
     public void StatePendingCancel(Order order){
-
+        WriteLine("Invalid state.");
     }
     public void StatePendingReplace(Order order){
-
+        WriteLine("Invalid state.");
     }
     public void StateCanceled(Order order){
-
+        WriteLine("Invalid state.");
     }
     public void StateRejected(Order order){
         WriteLine("Order rejected.");
         order.State = Rejected.GetInstance;
     }
     public void StateStopped(Order order){
-
+        WriteLine("Invalid state.");
     }
     
 }
